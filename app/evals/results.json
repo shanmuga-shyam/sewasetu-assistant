@@ -1,0 +1,884 @@
+{
+  "timestamp": "2026-10-31T13:44:41.365629",
+  "total_evaluated": 12,
+  "passed": 12,
+  "failed": 0,
+  "pass_rate_pct": 100.0,
+  "duration_seconds": 0.78,
+  "citizen_evaluations": [
+    {
+      "persona_id": "persona_1_phuleswari",
+      "name": "Phuleswari Saikia",
+      "age": 71,
+      "village": "Derial",
+      "block": "Sonari",
+      "mobile": "9854011221",
+      "language_style": "Assamese-inflected English; polite, elderly rural grandmother assisted by granddaughter Gita.",
+      "intent": "fresh_application",
+      "passed": true,
+      "duration_ms": 184,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Database Row Inserted & Audited",
+          "passed": true,
+          "details": "App: SSP26261457, Status: PENDING, Audit entries: 1, Portal user: 1"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Pranam babu, I am Phuleswari Saikia from Derial village, Sonari. My granddaughter Gita is typing on her phone. I was born on 12/03/1955 so I am 71 years old. My husband Bhaben passed away three years ago. I have an SBI bank account in Sonari branch: 98765432101, IFSC SBIN0001234. Please help me apply for the 250 rupees old age pension.",
+          "tool_called": "check_eligibility",
+          "tool_args": {
+            "age": 71,
+            "dob": "12/03/1955",
+            "block": "Sonari"
+          },
+          "tool_result": {
+            "eligible": true,
+            "age": 71,
+            "min_age_required": 60,
+            "monthly_pension": "Rs. 250 per month",
+            "statutory_sla_days": 15,
+            "valid_blocks": [
+              "Sonari",
+              "Rajapara",
+              "Dhemaji Pathar",
+              "Borgaon",
+              "Namti",
+              "Khelua"
+            ],
+            "errors": [],
+            "warnings": [],
+            "required_documents": [
+              "Age proof document (Aadhaar Card, Voter ID, Birth Certificate, or School Certificate)",
+              "Bank passbook with account number and IFSC"
+            ],
+            "message": "Applicant meets scheme eligibility criteria."
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Eligibility confirmed for Phuleswari Saikia. Submitting application...",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Phuleswari Saikia",
+            "dob": "12/03/1955",
+            "gender": "Female",
+            "marital_status": "Widowed",
+            "husband_name": "Late Bhaben Saikia",
+            "village": "Derial",
+            "block": "Sonari",
+            "bank_account": "98765432101",
+            "ifsc": "SBIN0001234",
+            "age_proof_doc_name": "aadhaar_phuleswari.pdf"
+          },
+          "tool_result": {
+            "success": true,
+            "application_id": 100020,
+            "application_no": "SSP26261457",
+            "applicant_name": "Phuleswari Saikia",
+            "mobile": "9854011221",
+            "block": "Sonari",
+            "status": "PENDING",
+            "statutory_sla_days": 15,
+            "tracking_url": "http://localhost:8000/status",
+            "message": "Application SSP26261457 submitted successfully. Under the Purvanchal RTPS Act, processing SLA is 15 days."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_2_bhabesh",
+      "name": "Bhabesh Kalita",
+      "age": 64,
+      "village": "Koliabor",
+      "block": "Rajapara",
+      "mobile": "9854022332",
+      "language_style": "Direct, impatient daily wager who applied earlier and wants an immediate progress update.",
+      "intent": "status_check",
+      "passed": true,
+      "duration_ms": 46,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Single Pending Record Retrieved Intact",
+          "passed": true,
+          "details": "Status retrieved: PENDING, DB count: 1"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Listen, I am Bhabesh Kalita from Koliabor village, Rajapara block. I submitted my pension paper 4 days ago at the computer shop. Tell me what is happening with my application? Is it approved or still lying there?",
+          "tool_called": "get_my_application",
+          "tool_args": {},
+          "tool_result": {
+            "found": true,
+            "application_id": 100021,
+            "application_no": "SSP26501901",
+            "applicant_name": "Bhabesh Kalita",
+            "mobile": "9854022332",
+            "dob": "04/09/1962",
+            "gender": "Male",
+            "marital_status": "Married",
+            "husband_name": null,
+            "village": "Koliabor",
+            "block": "Rajapara",
+            "bank_account_masked": "*******5671",
+            "ifsc": "CBIN0280123",
+            "status": "PENDING",
+            "submitted_at": "2026-10-27 13:44:41",
+            "decided_at": null,
+            "decided_by": null,
+            "days_since_submission": 4,
+            "sla_days": 15,
+            "sla_overdue": false,
+            "can_withdraw": true,
+            "audit_trail": [
+              {
+                "action": "SUBMIT",
+                "actor": "applicant:9854022332",
+                "note": "Portal web submission",
+                "timestamp": "2026-10-31 13:44:41"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_3_tarulata",
+      "name": "Tarulata Gogoi",
+      "age": 68,
+      "village": "Borbam",
+      "block": "Namti",
+      "mobile": "9854033443",
+      "language_style": "Anxious weaver who realizes she gave the wrong passbook number and needs to cancel and reapply.",
+      "intent": "withdraw_and_reapply",
+      "passed": true,
+      "duration_ms": 66,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Withdrawal & Clean Resubmission in Database",
+          "passed": true,
+          "details": "Total rows: 2, App 1: ('WITHDRAWN', 'APPLICANT', '111122223333'), App 2: ('PENDING', None, '55556666777788')"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Namaskar babu, I made a grave mistake. Yesterday I submitted my form, but I typed my neighbor's account number by mistake instead of my own United Bank passbook. Can I take back my pending application and submit the correct one? My correct account is 55556666777788.",
+          "tool_called": "withdraw_my_application",
+          "tool_args": {},
+          "tool_result": {
+            "success": true,
+            "application_id": 100022,
+            "application_no": "SSP26378593",
+            "status": "WITHDRAWN",
+            "message": "Application SSP26378593 has been successfully withdrawn. You are now free to submit a new application."
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Previous application withdrawn. Now submitting fresh application with updated bank details.",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Tarulata Gogoi",
+            "dob": "22/11/1957",
+            "gender": "Female",
+            "marital_status": "Widowed",
+            "husband_name": "Late Naren Gogoi",
+            "village": "Borbam",
+            "block": "Namti",
+            "bank_account": "55556666777788",
+            "ifsc": "UBIN0532101",
+            "age_proof_doc_name": "passbook_corrected.pdf"
+          },
+          "tool_result": {
+            "success": true,
+            "application_id": 100023,
+            "application_no": "SSP26248309",
+            "applicant_name": "Tarulata Gogoi",
+            "mobile": "9854033443",
+            "block": "Namti",
+            "status": "PENDING",
+            "statutory_sla_days": 15,
+            "tracking_url": "http://localhost:8000/status",
+            "message": "Application SSP26248309 submitted successfully. Under the Purvanchal RTPS Act, processing SLA is 15 days."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_4_ramakant",
+      "name": "Ramakant Tewari",
+      "age": 58,
+      "village": "Rampur",
+      "block": "Borgaon",
+      "mobile": "9854044554",
+      "language_style": "Colloquial Bhojpuri/Hindi; farmer mistakenly believing pension threshold is 58 years.",
+      "intent": "underage_attempt",
+      "passed": true,
+      "duration_ms": 43,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Underage Rejection (Rule Enforcement)",
+          "passed": true,
+          "details": "Tool success: False, DB row count: 0"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Pranam sahb, Ramakant Tewari from Rampur, Borgaon. I turned 58 this summer, born 05/06/1968. Work has become tough in the fields. Please register my name for the old age pension.",
+          "tool_called": "check_eligibility",
+          "tool_args": {
+            "age": 58,
+            "dob": "05/06/1968",
+            "block": "Borgaon"
+          },
+          "tool_result": {
+            "eligible": false,
+            "age": 58,
+            "min_age_required": 60,
+            "monthly_pension": "Rs. 250 per month",
+            "statutory_sla_days": 15,
+            "valid_blocks": [
+              "Sonari",
+              "Rajapara",
+              "Dhemaji Pathar",
+              "Borgaon",
+              "Namti",
+              "Khelua"
+            ],
+            "errors": [
+              "Applicant is 58 years old. The scheme requires a minimum age of 60 years."
+            ],
+            "warnings": [],
+            "required_documents": [
+              "Age proof document (Aadhaar Card, Voter ID, Birth Certificate, or School Certificate)",
+              "Bank passbook with account number and IFSC"
+            ],
+            "message": "Applicant currently does not satisfy all scheme criteria."
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Testing submission for underage applicant; expecting rejection.",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Ramakant Tewari",
+            "dob": "05/06/1968",
+            "gender": "Male",
+            "marital_status": "Married",
+            "village": "Rampur",
+            "block": "Borgaon",
+            "bank_account": "40987612345",
+            "ifsc": "SBIN0004567"
+          },
+          "tool_result": {
+            "success": false,
+            "error_type": "VALIDATION_FAILED",
+            "errors": [
+              "applicant must be 60 years of age or above"
+            ],
+            "message": "Application could not be submitted due to validation errors. Please correct the fields."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_5_minati",
+      "name": "Minati Barua",
+      "age": 74,
+      "village": "Charaideo",
+      "block": "Sonari",
+      "mobile": "9854055665",
+      "language_style": "Frail grandmother whose application has been stuck for 22 days without departmental action.",
+      "intent": "sla_inquiry",
+      "passed": true,
+      "duration_ms": 40,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Statutory SLA Overdue & Deemed Approval Identified",
+          "passed": true,
+          "details": "Overdue: True, Days elapsed: 22"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Beta, I am Minati Barua from Charaideo. It has been more than 3 weeks since we submitted my paper in Sonari. Nobody has approved it yet. What does the government rule say when officers delay so much?",
+          "tool_called": "check_sla_timeline",
+          "tool_args": {},
+          "tool_result": {
+            "found": true,
+            "application_id": 100024,
+            "application_no": "SSP26759697",
+            "applicant_name": "Minati Barua",
+            "status": "PENDING",
+            "submitted_at": "2026-10-09 13:44:41",
+            "sla_deadline": "2026-10-24 13:44:41",
+            "days_elapsed": 22,
+            "statutory_sla_days": 15,
+            "days_remaining_in_sla": 0,
+            "is_overdue": true,
+            "deemed_approval_eligible": true,
+            "deemed_approval_note": "Statutory 15-day SLA has lapsed. Under the Purvanchal RTPS Act, this application is eligible for automatic deemed approval by the system."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_6_dimbeswar",
+      "name": "Dimbeswar Chetia",
+      "age": 66,
+      "village": "Moran Pathar",
+      "block": "Dhemaji Pathar",
+      "mobile": "9854066776",
+      "language_style": "Common Service Center (CSC) VLE operator submitting on behalf of a rural elder.",
+      "intent": "kiosk_submission",
+      "passed": true,
+      "duration_ms": 55,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Kiosk Submission & Acknowledgment Slip",
+          "passed": true,
+          "details": "Status: PENDING, Ack URL: http://localhost:8000/ack/100025.pdf"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "kiosk_operator",
+          "message": "CSC Operator VLE-44102 reporting. Submitting Old Age Pension for citizen Dimbeswar Chetia, DOB 15/08/1960 (age 66), residing at Moran Pathar, block Dhemaji Pathar. Bank of Baroda account 123456789012, IFSC BARB0DHEMAJ. Aadhaar age proof attached. Please generate official acknowledgment.",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Dimbeswar Chetia",
+            "dob": "15/08/1960",
+            "gender": "Male",
+            "marital_status": "Married",
+            "village": "Moran Pathar",
+            "block": "Dhemaji Pathar",
+            "bank_account": "123456789012",
+            "ifsc": "BARB0DHEMAJ",
+            "age_proof_doc_name": "aadhaar_dimbeswar.pdf"
+          },
+          "tool_result": {
+            "success": true,
+            "application_id": 100025,
+            "application_no": "SSP26254252",
+            "applicant_name": "Dimbeswar Chetia",
+            "mobile": "9854066776",
+            "block": "Dhemaji Pathar",
+            "status": "PENDING",
+            "statutory_sla_days": 15,
+            "tracking_url": "http://localhost:8000/status",
+            "message": "Application SSP26254252 submitted successfully. Under the Purvanchal RTPS Act, processing SLA is 15 days."
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Application created; retrieving computer-generated acknowledgment slip.",
+          "tool_called": "get_application_acknowledgment",
+          "tool_args": {},
+          "tool_result": {
+            "found": true,
+            "application_id": 100025,
+            "application_no": "SSP26254252",
+            "applicant_name": "Dimbeswar Chetia",
+            "mobile": "9854066776",
+            "dob": "15/08/1960",
+            "village": "Moran Pathar",
+            "block": "Dhemaji Pathar",
+            "bank_account_last4": "9012",
+            "ifsc": "BARB0DHEMAJ",
+            "status": "PENDING",
+            "submitted_at": "2026-10-31 13:44:41",
+            "download_pdf_url": "http://localhost:8000/ack/100025.pdf",
+            "issuing_authority": "Department of Social Welfare, Government of Purvanchal",
+            "legal_notice": "Computer-generated acknowledgment under the Purvanchal Right to Public Services Act."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_7_arati",
+      "name": "Arati Das",
+      "age": 62,
+      "village": "Bihpuria",
+      "block": "Dispur",
+      "mobile": "9854077887",
+      "language_style": "Urban edge resident asking if she can apply from Dispur block.",
+      "intent": "invalid_block_attempt",
+      "passed": true,
+      "duration_ms": 40,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Invalid Pilot Block Rejected",
+          "passed": true,
+          "details": "Tool error: ['block must be one of: Sonari, Rajapara, Dhemaji Pathar, Borgaon, Namti, Khelua'], DB count: 0"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Hello, I am Arati Das, 62 years old, living in Bihpuria in Dispur block. Can you submit my old age pension application for Dispur?",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Arati Das",
+            "dob": "10/10/1964",
+            "gender": "Female",
+            "marital_status": "Married",
+            "husband_name": "Prabin Das",
+            "village": "Bihpuria",
+            "block": "Dispur",
+            "bank_account": "333344445555",
+            "ifsc": "SBIN0005555"
+          },
+          "tool_result": {
+            "success": false,
+            "error_type": "VALIDATION_FAILED",
+            "errors": [
+              "block must be one of: Sonari, Rajapara, Dhemaji Pathar, Borgaon, Namti, Khelua"
+            ],
+            "message": "Application could not be submitted due to validation errors. Please correct the fields."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_8_joyprakash",
+      "name": "Joyprakash Nath",
+      "age": 65,
+      "village": "Gelakey",
+      "block": "Khelua",
+      "mobile": "9854088998",
+      "language_style": "Confused about bank passbook IFSC formatting; gets guidance and corrects code.",
+      "intent": "ifsc_correction_submission",
+      "passed": true,
+      "duration_ms": 49,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Standardized Uppercase 11-Digit IFSC Stored",
+          "passed": true,
+          "details": "Stored IFSC: PUNB0012345, Status: PENDING"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Namaste, I am Joyprakash Nath from Gelakey village, Khelua. DOB 03/04/1961. My bank is Punjab National Bank, account 444455556666. On my cheque book it is written 'punb01234'. If that is invalid, the branch IFSC is PUNB0012345. Please submit with the correct one.",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Joyprakash Nath",
+            "dob": "03/04/1961",
+            "gender": "Male",
+            "marital_status": "Married",
+            "village": "Gelakey",
+            "block": "Khelua",
+            "bank_account": "444455556666",
+            "ifsc": "PUNB0012345"
+          },
+          "tool_result": {
+            "success": true,
+            "application_id": 100026,
+            "application_no": "SSP26379281",
+            "applicant_name": "Joyprakash Nath",
+            "mobile": "9854088998",
+            "block": "Khelua",
+            "status": "PENDING",
+            "statutory_sla_days": 15,
+            "tracking_url": "http://localhost:8000/status",
+            "message": "Application SSP26379281 submitted successfully. Under the Purvanchal RTPS Act, processing SLA is 15 days."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_9_malati",
+      "name": "Malati Medhi",
+      "age": 76,
+      "village": "Sepon",
+      "block": "Sonari",
+      "mobile": "9854099009",
+      "language_style": "Illiterate widow asking if her pension was officially approved and what the officer wrote.",
+      "intent": "approved_inquiry",
+      "passed": true,
+      "duration_ms": 41,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Approved Status & Officer Decision Recorded",
+          "passed": true,
+          "details": "Status: APPROVED, Decided by: officer:admin"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Pranam babu, I am Malati Medhi from Sepon. The postman told me my pension was passed by the Sonari office. Can you check and read me the officer's exact decision and date?",
+          "tool_called": "get_my_application",
+          "tool_args": {},
+          "tool_result": {
+            "found": true,
+            "application_id": 100027,
+            "application_no": "SSP26714301",
+            "applicant_name": "Malati Medhi",
+            "mobile": "9854099009",
+            "dob": "25/12/1949",
+            "gender": "Female",
+            "marital_status": "Widowed",
+            "husband_name": "Late Bipul Medhi",
+            "village": "Sepon",
+            "block": "Sonari",
+            "bank_account_masked": "********9999",
+            "ifsc": "SBIN0007890",
+            "status": "APPROVED",
+            "submitted_at": "2026-10-21 13:44:41",
+            "decided_at": "2026-10-28 13:44:41",
+            "decided_by": "officer:admin",
+            "days_since_submission": 10,
+            "sla_days": 15,
+            "sla_overdue": false,
+            "can_withdraw": false,
+            "audit_trail": [
+              {
+                "action": "SUBMIT",
+                "actor": "applicant:9854099009",
+                "note": "Counter submission",
+                "timestamp": "2026-10-31 13:44:41"
+              },
+              {
+                "action": "APPROVED",
+                "actor": "officer:admin",
+                "note": "Age 76 verified from Voter ID. All documents in order.",
+                "timestamp": "2026-10-31 13:44:41"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "persona_10_jagannath",
+      "name": "Jagannath Bora",
+      "age": 63,
+      "village": "Salaguri",
+      "block": "Namti",
+      "mobile": "9854000110",
+      "language_style": "Heard a rumor about double pension and tries to submit a duplicate application on his active mobile.",
+      "intent": "duplicate_prevention",
+      "passed": true,
+      "duration_ms": 46,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Duplicate Active Application Blocked",
+          "passed": true,
+          "details": "Error type: DUPLICATE_APPLICATION, Total DB rows: 1"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "citizen",
+          "message": "Hello sir, I am Jagannath Bora, Salaguri, Namti. My neighbor said government is giving a second bonus pension. Please apply again for my mobile 9854000110.",
+          "tool_called": "submit_pension_application",
+          "tool_args": {
+            "applicant_name": "Jagannath Bora",
+            "dob": "01/02/1963",
+            "gender": "Male",
+            "marital_status": "Married",
+            "village": "Salaguri",
+            "block": "Namti",
+            "bank_account": "888899990000",
+            "ifsc": "SBIN0009999"
+          },
+          "tool_result": {
+            "success": false,
+            "error_type": "DUPLICATE_APPLICATION",
+            "existing_application_no": "SSP25187741",
+            "existing_status": "APPROVED",
+            "message": "Application SSP25187741 (APPROVED) already exists for mobile number 9854000110. A pending application can be withdrawn if you need to apply afresh."
+          }
+        }
+      ]
+    }
+  ],
+  "officer_evaluations": [
+    {
+      "persona_id": "officer_1_sonari",
+      "name": "Anurag Sharma (BDO Sonari)",
+      "username": "bdo_sonari",
+      "jurisdiction": "Sonari",
+      "intent": "officer_approval",
+      "passed": true,
+      "duration_ms": 106,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Officer Approval & Audit Trail Stamp in DB",
+          "passed": true,
+          "details": "Status: APPROVED, Decided by: officer:bdo_sonari, Audit note: Aadhaar verified age 71, valid SBI account in Sonari block. Approved under Purvanchal RTPS Act."
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "officer",
+          "message": "Check the pending application for Phuleswari Saikia (mobile 9854011221). Inspect her age proof document and approve the application with justification: 'Aadhaar verified age 71, valid SBI account in Sonari block. Approved under Purvanchal RTPS Act.'",
+          "tool_called": "search_applications",
+          "tool_result": {
+            "results": [
+              {
+                "application_id": 100020,
+                "application_no": "SSP26261457",
+                "applicant_name": "Phuleswari Saikia",
+                "mobile": "9854011221",
+                "block": "Sonari",
+                "status": "PENDING",
+                "submitted_at": "2026-10-31 13:44:41"
+              }
+            ],
+            "total_found": 1,
+            "query": "9854011221"
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Found application ID 100020; inspecting age proof and approving.",
+          "tool_called": "approve_application",
+          "tool_result": {
+            "success": true,
+            "application_id": 100020,
+            "application_no": "SSP26261457",
+            "status": "APPROVED",
+            "decided_at": "2026-10-31 13:44:42",
+            "decided_by": "officer:bdo_sonari",
+            "justification": "Aadhaar verified age 71, valid SBI account in Sonari block. Approved under Purvanchal RTPS Act.",
+            "message": "Application SSP26261457 has been successfully approved."
+          }
+        }
+      ]
+    },
+    {
+      "persona_id": "officer_2_rajapara",
+      "name": "Priyanka Neog (BDO Rajapara)",
+      "username": "bdo_rajapara",
+      "jurisdiction": "Rajapara",
+      "intent": "officer_queue_monitoring",
+      "passed": true,
+      "duration_ms": 56,
+      "failure_reasons": [],
+      "checks": [
+        {
+          "name": "Queue Metrics & Block Statistics Query",
+          "passed": true,
+          "details": "Total: 100012, Overdue pending: 701"
+        }
+      ],
+      "transcript": [
+        {
+          "turn": 1,
+          "speaker": "officer",
+          "message": "Search for overdue applications in Rajapara block older than 15 days, and inspect block-level statistics.",
+          "tool_called": "get_block_statistics",
+          "tool_result": {
+            "total_applications": 100012,
+            "status_distribution": {
+              "APPROVED": 82904,
+              "DEEMED_APPROVED": 9000,
+              "REJECTED": 7000,
+              "PENDING": 706,
+              "WITHDRAWN": 402
+            },
+            "sla_overdue_pending": 701,
+            "statutory_sla_days": 15,
+            "pending_by_block": {
+              "Sonari": 126,
+              "Dhemaji Pathar": 125,
+              "Khelua": 124,
+              "Rajapara": 124,
+              "Namti": 113,
+              "Borgaon": 94
+            },
+            "deemed_approved_count": 9000,
+            "approved_count": 82904,
+            "pending_count": 706,
+            "rejected_count": 7000,
+            "withdrawn_count": 402
+          }
+        },
+        {
+          "turn": 2,
+          "speaker": "assistant",
+          "message": "Retrieved statistics and overdue queue for Rajapara.",
+          "tool_called": "list_applications",
+          "tool_result": {
+            "total_count": 123,
+            "page": 1,
+            "limit": 10,
+            "total_pages": 13,
+            "filter_status": "PENDING",
+            "filter_block": "Rajapara",
+            "filter_overdue_only": true,
+            "applications": [
+              {
+                "application_id": 99994,
+                "application_no": "SSP26456835",
+                "applicant_name": "Dimbeswar Chetia",
+                "mobile": "8983448846",
+                "block": "Rajapara",
+                "village": "Dighaljan",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 12:07:00",
+                "age": 86,
+                "days_pending": 45,
+                "overdue": true
+              },
+              {
+                "application_id": 99807,
+                "application_no": "SSP26027089",
+                "applicant_name": "Haren Das",
+                "mobile": "8857753825",
+                "block": "Rajapara",
+                "village": "Rajapara Gaon",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 12:18:00",
+                "age": 68,
+                "days_pending": 45,
+                "overdue": true
+              },
+              {
+                "application_id": 99489,
+                "application_no": "SSP26984752",
+                "applicant_name": "Someswar Baruah",
+                "mobile": "8532243954",
+                "block": "Rajapara",
+                "village": "Rajapara Gaon",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 12:18:00",
+                "age": 85,
+                "days_pending": 45,
+                "overdue": true
+              },
+              {
+                "application_id": 99906,
+                "application_no": "SSP26707550",
+                "applicant_name": "Jahanara Bhuyan",
+                "mobile": "7268293025",
+                "block": "Rajapara",
+                "village": "Dighaljan",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 12:49:00",
+                "age": 64,
+                "days_pending": 45,
+                "overdue": true
+              },
+              {
+                "application_id": 99813,
+                "application_no": "SSP26597876",
+                "applicant_name": "Phuleswari Sarma",
+                "mobile": "7626918365",
+                "block": "Rajapara",
+                "village": "Dighaljan",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 13:00:00",
+                "age": 69,
+                "days_pending": 45,
+                "overdue": true
+              },
+              {
+                "application_id": 99605,
+                "application_no": "SSP26626135",
+                "applicant_name": "Aideu Sarma",
+                "mobile": "9788300637",
+                "block": "Rajapara",
+                "village": "Dighaljan",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 14:14:00",
+                "age": 80,
+                "days_pending": 44,
+                "overdue": true
+              },
+              {
+                "application_id": 99404,
+                "application_no": "SSP26552789",
+                "applicant_name": "Aideu Talukdar",
+                "mobile": "6794011116",
+                "block": "Rajapara",
+                "village": "Teliagaon",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 14:33:00",
+                "age": 61,
+                "days_pending": 44,
+                "overdue": true
+              },
+              {
+                "application_id": 99854,
+                "application_no": "SSP26714640",
+                "applicant_name": "Girish Dutta",
+                "mobile": "7525779309",
+                "block": "Rajapara",
+                "village": "Rajapara Gaon",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 15:48:00",
+                "age": 72,
+                "days_pending": 44,
+                "overdue": true
+              },
+              {
+                "application_id": 99331,
+                "application_no": "SSP26218742",
+                "applicant_name": "Deben Kalita",
+                "mobile": "7724516605",
+                "block": "Rajapara",
+                "village": "Rajapara Gaon",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 16:32:00",
+                "age": 82,
+                "days_pending": 44,
+                "overdue": true
+              },
+              {
+                "application_id": 99555,
+                "application_no": "SSP26936316",
+                "applicant_name": "Paban Chetia",
+                "mobile": "7655772696",
+                "block": "Rajapara",
+                "village": "Dighaljan",
+                "status": "PENDING",
+                "submitted_at": "2026-09-16 17:10:00",
+                "age": 64,
+                "days_pending": 44,
+                "overdue": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
